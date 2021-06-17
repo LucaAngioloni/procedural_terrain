@@ -1,7 +1,7 @@
 var cols, rows;
 var scl = 20;
 const w = window.innerWidth;
-const h = window.innerHeight - 50;
+const h = window.innerHeight;
 
 const w_key = 87;
 const a_key = 65;
@@ -35,6 +35,27 @@ function setup() {
 }
 
 function draw() {
+  translate(-w / 2, -h / 2);
+  background(50);
+
+  fill(255);
+  stroke(0);
+  textFont(myFont);
+  textSize(40);
+  textAlign(RIGHT);
+  //Print instructions
+  text("Use W,A,S,D to move,", w - 20, 40);
+  text("shift to move faster.", w - 20, 90);
+
+  // Print FPS
+  textAlign(LEFT);
+  let fps = frameRate();
+  text("FPS: " + fps.toFixed(2), 20, 40);
+
+  // Print Title
+  textAlign(CENTER);
+  text("Procedural Terrain", w / 2, 40);
+
   // Keys
   var speed = 0.1;
   if (keyIsDown(shift_key)) {
@@ -68,12 +89,11 @@ function draw() {
     yoff += 0.15;
   }
 
-  background(50);
-  translate(0, 50);
-  rotateX(PI / 3);
+  translate(0, 150);
+  rotateX(PI / 4);
+  translate(-(w * 0.2), 0);
   fill(220, 220, 220, 40);
   stroke(230);
-  translate(-(cols * scl) / 2, -h / 2);
   for (var y = 0; y < rows - 1; y++) {
     beginShape(TRIANGLE_STRIP);
     for (var x = 0; x < cols; x++) {
@@ -82,18 +102,4 @@ function draw() {
     }
     endShape();
   }
-
-  rotateX(-PI / 3);
-  translate(0, -h / 2);
-  fill(255);
-  stroke(0);
-  textFont(myFont);
-  textSize(40);
-  //Print instructions
-  text("Use W,A,S,D to move,", w - 200, 40);
-  text("shift to move faster.", w - 200, 90);
-
-  // Print FPS
-  let fps = frameRate();
-  text("FPS: " + fps.toFixed(2), 20, 40);
 }
